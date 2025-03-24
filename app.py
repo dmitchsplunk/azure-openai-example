@@ -1,8 +1,8 @@
 import os
 from openai import AzureOpenAI
-import openlit
+from opentelemetry.instrumentation.openai_v2 import OpenAIInstrumentor
 
-openlit.init()
+OpenAIInstrumentor().instrument()
 
 endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
 model_name = "gpt-35-turbo"

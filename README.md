@@ -1,5 +1,8 @@
 # Azure OpenAI Example with Splunk
 
+This version of the example uses [opentelemetry-instrumentation-openai-v2](https://pypi.org/project/opentelemetry-instrumentation-openai-v2/) 
+rather than OpenLIT to instrument the application. 
+
 ## Prerequisites
 
 * Azure account with Azure OpenAI enabled (refer to this [document](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) for details)
@@ -14,6 +17,9 @@ git clone https://github.com/dmitchsplunk/azure-openai-example.git
 
 # navigate to the directory repo
 cd azure-openai-example
+
+# switch to the branch with this specific example
+git checkout -b opentelemetry-instrumentation
 
 # create a virtual environment 
 python3 -m venv openai-env
@@ -34,17 +40,16 @@ python app.py
 ``` bash
 export OTEL_SERVICE_NAME=azure-openai-example
 export OTEL_RESOURCE_ATTRIBUTES='deployment.environment=test'
-export PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1
 export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
 export OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 
-pip install splunk-opentelemetry==1.21.0
+pip install "splunk-opentelemetry[all]"==2.1.0
 
-./openai-env/bin/splunk-py-trace-bootstrap        
+./openai-env/bin/opentelemetry-bootstrap -a install  
 
-pip3 install openlit==1.33.4 opentelemetry-api==1.27.0
+pip install opentelemetry-instrumentation-openai-v2==2.1b0
 
-./openai-env/bin/splunk-py-trace python app.py 
+./openai-env/bin/opentelemetry-instrument python app.py 
 ```
 
 You should see traces in Splunk Observability Cloud that look like the following: 

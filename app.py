@@ -1,5 +1,8 @@
 import os
 from openai import AzureOpenAI
+import openlit
+
+openlit.init()
 
 endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
 model_name = "gpt-35-turbo"

@@ -42,6 +42,7 @@ export OTEL_SERVICE_NAME=azure-openai-example
 export OTEL_RESOURCE_ATTRIBUTES='deployment.environment=test'
 export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
 export OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+export OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true
 
 pip install "splunk-opentelemetry[all]"==2.1.0
 

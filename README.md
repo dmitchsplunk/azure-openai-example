@@ -53,6 +53,7 @@ pip install opentelemetry-instrumentation-openai-v2==2.1b0
 ./openai-env/bin/opentelemetry-instrument python app.py 
 ```
 
+
 You should see traces in Splunk Observability Cloud that look like the following: 
 
 ![Example trace](./images/trace.png)
